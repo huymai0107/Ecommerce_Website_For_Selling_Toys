@@ -16,6 +16,6 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 mongoose.connect(process.env.MONGO_URL)
-    .then(() => console.log('Connected'))
-    .catch(err => console.error('Unconnected', err))
+    .then(() => console.log('Connected to DB'))
+    .catch(err => console.error('Unconnected to DB', err))
 
