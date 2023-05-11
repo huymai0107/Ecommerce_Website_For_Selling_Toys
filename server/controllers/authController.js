@@ -1,6 +1,7 @@
 const User = require("../models/User")
 const CryptoJS = require("crypto-js")
 const jwt = require("jsonwebtoken");
+const Cart = require("../models/Cart");
 
 let refreshTokens = [];
 
@@ -12,9 +13,13 @@ const authController = {
         email: req.body.email,
         password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SECRET) 
     });
+    const newCart = new Cart({
+      userId: newCustomer._id
+    })
     try{
         const savedCustomer = await newCustomer.save();
-        return res.status(201).json({savedCustomer})
+        const savedCart = await newCart.save();
+        return res.status(201).json({savedCustomer}).json({savedCart})
     } catch(err){
         return res.status(500).json({err})
     }
