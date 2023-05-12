@@ -6,10 +6,11 @@ const auth = require('./routes/auth')
 const cart = require('./routes/cart');
 const product = require('./routes/product');
 const order = require('./routes/order')
+const cors = require('cors')
 
 dotenv.config();
-
 const app = express();
+app.use(cors())
 app.use(express.json());
 app.use('/user', user)
 app.use('/auth', auth)

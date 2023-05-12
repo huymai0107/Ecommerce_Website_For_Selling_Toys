@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import loginSignupImage from "../assest/person.png";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/apiRequest";
 import { useDispatch } from "react-redux"
-
-
-
 function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = (e) =>{
-    e.preventDefaukt();
+    e.preventDefault();
     const newUser ={
       username: username,
       password: password,
@@ -24,19 +20,18 @@ function SignIn() {
     <div className="p-3 md:p-4">
     <div className="w-full max-w-sm bg-white m-auto flex  flex-col p-4">
       {/* <h1 className='text-center text-2xl font-bold'>Login</h1> */}
-      <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto">
+      {/* <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto">
         <img src={loginSignupImage} alt="" className="w-full" />
-      </div>
+      </div> */}
 
       <form className="w-full py-3 flex flex-col" onSubmit={handleLogin}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="username">username</label>
         <input
           type={"text"}
           id="username"
           name="username"
           className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
           onChange={(e) => setUsername(e.target.value)}
-
         />
 
         <label htmlFor="password">Password</label>
@@ -53,13 +48,12 @@ function SignIn() {
           Login
         </button>
       </form>
-      
-      <p className="text-left text-sm mt-2">
+      {/* <p className="text-left text-sm mt-2">
         Don't  have account ?{" "}
         <Link to={"/signup"} className="text-red-500 underline">
           Sign Up
         </Link>
-      </p>
+      </p> */}
     </div>
     </div>
   )
