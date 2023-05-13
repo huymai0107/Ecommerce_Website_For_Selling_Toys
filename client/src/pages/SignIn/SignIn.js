@@ -15,6 +15,7 @@ function SignIn() {
       password: password,
     }
     loginUser(newUser,dispatch, navigate)
+    navigate("/");
   };
       
   return (
@@ -41,7 +42,6 @@ function SignIn() {
           required
         />
       </div>
-      &nbsp;hadz
       <button type="submit" className="signin-button">Sign in</button>
       <p className="signup-link">
         Don't have an account? <Link to="/signup">Signup</Link>

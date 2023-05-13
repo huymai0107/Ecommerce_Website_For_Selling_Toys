@@ -8,13 +8,16 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter,createRoutesFromElements,Route, RouterProvider} from 'react-router-dom'; 
 import SignIn from './pages/SignIn/SignIn';
 import Signup from './pages/SignUp/SignUp';
+import Home from './pages/Home/home';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path ='/' element={<App/>} >
       <Route path='signin' element={<SignIn/>}/>
       <Route path='signup' element={<Signup/>}/>
+      <Route path='/' element={<Home/>}/>
     </Route>
+    
   )
 )
 

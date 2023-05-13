@@ -49,7 +49,7 @@ const authController = {
 
   //LOGIN
   loginUser: async (req, res) => {
-    try {
+    // try {
         const user = await User.findOne({username: req.body.username});
         if(!user)
             {
@@ -73,9 +73,9 @@ const authController = {
 
         const { password, ...others} = user._doc
         return res.status(200).json({others, accessToken})
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    // } catch (err) {
+    //   res.status(500).json(err);
+    // }
   },
 
   requestRefreshToken: async (req, res) => {

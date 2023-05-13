@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaShoppingCart, FaUser,FaSearch } from "react-icons/fa";
-import logo from '../../assest/logo-trans.png';
+import logo from '../../assest/logo-trans.jpg';
 import {MdArrowDropDown,MdArrowDropUp} from 'react-icons/md';
 import {ImMenu3,ImMenu4} from 'react-icons/im'; 
 import {Link} from 'react-router-dom';
@@ -33,7 +33,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
-                to={'signin'}
+                to={'/'}
                 className=" text-white px-3 py-2 rounded-md text-xl font-medium"
               >
                 Home
@@ -77,16 +77,16 @@ const Navbar = () => {
                 )}
               </div>
               <Link
-                to={'/'}
+                to={'/signin'}
                 className=" text-white px-3 py-2 rounded-md text-xl font-medium"
               >
-                About Us
+                Sign In
               </Link>
               <Link
-                to={'/'}
+                to={'/signup'}
                 className=" text-white px-3 py-2 rounded-md text-xl font-medium"
               >
-                Contact
+                Sign Up
               </Link>
             </div>
           </div>
@@ -159,7 +159,7 @@ const Navbar = () => {
               Home
             </Link>
             
-            <div className="relative">
+            {/* <div className="relative">
               <button
                 onClick={toggleProduct}
                 type="button"
@@ -195,7 +195,7 @@ const Navbar = () => {
                   </div>
                 )}
          
-            </div>
+            </div> */}
           </div>
           <div className="pt-4 pb-3 border-t border-gray-700">
             <div className="flex items-center px-5">
