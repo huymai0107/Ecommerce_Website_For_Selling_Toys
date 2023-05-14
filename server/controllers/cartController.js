@@ -45,15 +45,44 @@ const cartController = {
     }
   },
 
+  // clearCart: async (req, res) => {
+  //   try {
+  //     const userId = req.params.userId;
+  //     await Cart.findOne({userID: userId}).items.f;
+  //     res.json({ message: 'Cart cleared successfully' });
+  //   } catch (error) {
+  //     res.status(500).json({ error: 'Internal server error' });
+  //   }
+  // }
+  // clearCart: async (req, res) => {
+  //   try {
+  //     const userId = req.params.userId;
+  //     const itemId = req.params.itemId;
+  //     const cart = await Cart.findOneAndUpdate(
+  //       { userId },
+  //       { $pull: { items: { _id: itemId } } },
+  //       { new: true }
+  //     ).populate('items.productId');
+  //     res.json(cart);
+  //   } catch (error) {
+  //     res.status(500).json({ error: 'Internal server error' });
+  //   }
+  // },
   clearCart: async (req, res) => {
     try {
       const userId = req.params.userId;
-      await Cart.findOneAndRemove({ userId });
-      res.json({ message: 'Cart cleared successfully' });
+      const cart = await Cart.findOneAndUpdate(
+        { userId },
+        { $set: { items: [] } },
+        { new: true }
+      ).populate('items.productId');
+      res.json(cart);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
-  }
+  },
+  
 };
+
 
 module.exports = cartController;

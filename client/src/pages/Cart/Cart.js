@@ -12,11 +12,11 @@ const Cart = () => {
     const navigate = useNavigate();
     useEffect(() =>{
         // console.log(cartData.items)
-        console.log(user);
+        // console.log(user);
         if(!user){
           navigate("/signin");
         }
-          getCart(user.others?._id,dispatch);
+          getCart(user?.others._id,dispatch);
        },[]);
 
   return (
@@ -32,18 +32,18 @@ const Cart = () => {
           );
         })} */}
 
-        {/* {cartData.items.map((cart) => {
+        {cartData?.items.map((cart) => {
           return (
-            <div className="user-container" key ={cart.productId}>
-         </div>
+            <div className="user-container" key ={cart._id}>
+            
+              <div  className="home-user">{cart.productId._id}</div>
+              <div  className="home-user">{cart.quantity}</div>
+
+            </div>
           );
-        })} */}
-        
+        })}
       </div>
     </main>
-    // <>
-    //     <h1>{cartData.items.productId}</h1>
-    // </>
   )
 }
 

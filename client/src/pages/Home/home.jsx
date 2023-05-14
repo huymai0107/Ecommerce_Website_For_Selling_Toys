@@ -27,7 +27,7 @@ const HomePage = () => {
 
   const userData = useSelector((state) => state.user.users?.allUsers);
   const productData = useSelector((state) => state.product.products?.allProducts);
-  const [productId, setproductId] = useState('');
+  // const [productId, setproductId] = useState('');
 
   function handleAddProduct(id) {
 
@@ -71,7 +71,7 @@ const HomePage = () => {
         {productData?.map((product) => {
           return (
             <div className="user-container" key ={product._id}>
-              <div  className="home-user">{product.username}</div>
+              <div  className="home-user">{product.name}</div>
               <button className="delete-user" onClick={() => handleAddProduct(product._id)}> add </button>
             </div>
           );
