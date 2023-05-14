@@ -83,6 +83,12 @@ const Navbar = () => {
                 Sign In
               </Link>
               <Link
+                to={'/cart'}
+                className=" text-white px-3 py-2 rounded-md text-xl font-medium"
+              >
+                Cart
+              </Link>
+              <Link
                 to={'/signup'}
                 className=" text-white px-3 py-2 rounded-md text-xl font-medium"
               >

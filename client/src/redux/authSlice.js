@@ -5,8 +5,9 @@ const authSlice = createSlice({
         login:{
             currentUser: null,
             isFetching:false,
-            error: false
+            error: false,
         },
+        msg: null,
         register:{
             isFetching:false,
             error: false,
@@ -27,7 +28,7 @@ const authSlice = createSlice({
         loginFailed: (state, action) => {
             state.login.isFetching = false;
             state.login.error = true;
-
+            state.msg = action.payload;
         },
 
         registerStart: (state) =>{
