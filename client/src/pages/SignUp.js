@@ -3,29 +3,31 @@ import loginSignupImage from '../assest/person.png'
 import {BiShow, BiHide} from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { ImagetoBase64 } from '../util/ImagetoBase64'; 
+import { useDispatch } from "react-redux"
+import { registerUser } from '../redux/apiRequest';
+
 function Signup() {
-  const navigate = useNavigate();
   const[showPassword, setShowPassword] = useState(false)
   const handleShowPassword = () =>{
     setShowPassword(preve => !preve)
   }
 
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-
   const handleShowConfirmPassword =() =>{
     setShowConfirmPassword(preve => !preve)
   }
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch(); 
+  
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
+    userName: "",
     email: "",
     password: "",
     confirmPassword: "",
     image : ""
   });
-  console.log(data);
-
+  
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((preve) => {
@@ -35,37 +37,41 @@ function Signup() {
       };
     });
   };
+
   const handleUploadProfileImage = async(e)=>{
     const data = await ImagetoBase64(e.target.files[0])
-    console.log(data)
-
+    // console.log(data)
     setData((preve)=>{
         return{
           ...preve,
           image : data
         }
     })
-
 }
-console.log(process.env.REACT_APP_SERVER_DOMAIN)
-  const handleSubmit = async(e) => {
-    e.preventDefault()
-    const{firstName, email,password,confirmPassword} = data 
-    if(firstName && email && password && confirmPassword){
-      if(password === confirmPassword){
-        const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/signup`,{
-          method: "POST",
-          headers:{
-            "content-type": "application/json"
-          },
-          body: JSON.stringify(data)
-        })
-        const dataRes = await fetchData.json()
-        console.log(dataRes)
-        // alert(dataRes.message)
-     
+const resetForm = () => {
+  setData({
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    image: ''
+  });
+};
 
-        navigate("/login")
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const{userName, email,password,confirmPassword,image} = data 
+    if(email && password && confirmPassword){
+      if(password === confirmPassword){
+        const newUser ={
+          username: userName,
+          email: email,
+          password: password,
+          image:image
+        }
+        registerUser(newUser,dispatch, navigate); 
+        resetForm();
+       
       }
       else{
         alert("Password and confirm password not the same")
@@ -91,12 +97,9 @@ console.log(process.env.REACT_APP_SERVER_DOMAIN)
         </div>
 
         <form className='w-full py-3 flex flex-col' onSubmit={handleSubmit}>
-          <label htmlFor='firstName'>First Name</label>
-          <input type={'text'} id='firstName' name='firstName' className='mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded' value={data.firstName}  onChange={handleOnChange}/>
-
-          <label htmlFor='lastName'>Last Name</label>
-          <input type={'text'} id='lastName' name='lastName' className='mt-1  mb-2 w-full bg-slate-200 px-2 py-1 rounded' value={data.lastName}  onChange={handleOnChange} />
-           
+          <label htmlFor='userName'>UserName</label>
+          <input type={'text'} id='userName' name='userName' className='mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded' value={data.userName}  onChange={handleOnChange}/>
+         
           <label htmlFor='email'>Email </label>
           <input type={'email'} id='email' name='email' className='mt-1 mb-2  w-full bg-slate-200 px-2 py-1 rounded' value={data.email}  onChange={handleOnChange}/>
           

@@ -11,7 +11,8 @@ const authController = {
     const newCustomer = new User({        
         username: req.body.username,
         email: req.body.email,
-        password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SECRET) 
+        password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SECRET),
+        image: req.body.image
     });
     const newCart = new Cart({
       userId: newCustomer._id
@@ -50,10 +51,10 @@ const authController = {
   //LOGIN
   loginUser: async (req, res) => {
     // try {
-        const user = await User.findOne({username: req.body.username});
+        const user = await User.findOne({email: req.body.email});
         if(!user)
             {
-                return res.status(401).json("Invalid username")
+                return res.status(401).json("Invalid email")
             }
         const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SECRET)
         const Originalpassword = hashedPassword.toString(CryptoJS.enc.Utf8);

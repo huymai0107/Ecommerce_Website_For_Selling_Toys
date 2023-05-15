@@ -1,18 +1,25 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import loginSignupImage from "../assest/person.png";
 import { BiShow, BiHide } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { loginUser } from "../redux/apiRequest";
+import { useDispatch } from "react-redux";
+
 
 function SignIn() {
     const[showPassword, setShowPassword] = useState(false)
     const handleShowPassword = () =>{
       setShowPassword(preve => !preve)
     }
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch(); 
   
     const [data, setData] = useState({
       email: "",
       password: "",
     });
+
     const handleOnChange = (e)=>{
       const {name,value} = e.target
       setData((preve)=>{
@@ -23,11 +30,22 @@ function SignIn() {
       })
     }
   
-    const handleSubmit =(e) => {
+    const resetForm = () => {
+      setData({
+        userName: '',
+        password: ''
+      });
+    };
+    const handleSubmit =async (e) => {
       e.preventDefault()
       const{ email,password} = data 
       if(email && password){
-          alert("Successful")
+        const newUser ={
+          email: email,
+          password: password,
+        }
+        loginUser(newUser,dispatch, navigate);
+        resetForm();
         }
         else{
           alert("Please enter required field")
