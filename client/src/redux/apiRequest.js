@@ -2,10 +2,8 @@ import axios from "axios"
 import { loginFailed, loginStart, loginSuccess, registerFailed, registerStart, registerSuccess } from "./authSlice"
 import { getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice";
 import { getProductsFailed, getProductsStart, getProductsSuccess } from "./productSlice";
-import 
-{getCartFailed, getCartStart, getCartSuccess, addCartFailed, addCartStart, addCartSuccess
-} from "./cartSlice"
-
+import {getCartFailed, getCartStart, getCartSuccess, addCartFailed, addCartStart, addCartSuccess} from "./cartSlice"
+import {gettheproductStart,gettheproductFailed,gettheproductSuccess}  from "./getProductSlice"
 export const loginUser = async(user, dispatch, navigate) => {
     
     dispatch(loginStart());
@@ -83,5 +81,19 @@ export const getCart = async (userid,dispatch) =>{
         dispatch(getCartSuccess(res.data))
     }catch(err){
         dispatch(getCartFailed());
+    }
+}
+export const getProductById = async (id,dispatch) =>{
+    dispatch(gettheproductStart());
+    // console.log(accesstoken);
+    try{
+        const res = await axios.get("http://localhost:8080/product/" + id.id.toString(),{
+            // headers: {token:`Bearer ${accesstoken}`}
+        })
+        // console.log(res.data)
+        dispatch(gettheproductSuccess(res.data))
+        
+    }catch(err){
+        dispatch(gettheproductFailed());
     }
 }

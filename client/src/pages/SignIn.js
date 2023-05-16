@@ -4,7 +4,7 @@ import loginSignupImage from "../assest/person.png";
 import { BiShow, BiHide } from "react-icons/bi";
 import { loginUser } from "../redux/apiRequest";
 import { useDispatch } from "react-redux";
-
+import { Notify } from "../util/Notify";
 
 function SignIn() {
     const[showPassword, setShowPassword] = useState(false)
@@ -48,7 +48,7 @@ function SignIn() {
         resetForm();
         }
         else{
-          alert("Please enter required field")
+        await Notify("Please enter required field")
         }
       }  
   return (
