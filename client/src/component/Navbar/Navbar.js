@@ -4,6 +4,8 @@ import logo from '../../assest/logo-trans.png';
 import {MdArrowDropDown,MdArrowDropUp} from 'react-icons/md';
 import {ImMenu3,ImMenu4} from 'react-icons/im'; 
 import {Link} from 'react-router-dom';
+import { useSelector } from "react-redux";
+
 
 
 const Navbar = () => {
@@ -12,15 +14,13 @@ const Navbar = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-
   const toggleMenu = () => setMenuIsOpen(!isMenuOpen);
   const toggleProduct = () => setIsOpen(!isOpen);
 
-  
-
-
+  const currentUser = useSelector((state) => state.user.currentUser);
+  console.log(currentUser)
   return (
-    <nav className="bg-red-500">
+    <nav className="sticky top-0 bg-red-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -33,7 +33,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
-                to={'signin'}
+                to={'/'}
                 className=" text-white px-3 py-2 rounded-md text-xl font-medium"
               >
                 Home
@@ -77,13 +77,13 @@ const Navbar = () => {
                 )}
               </div>
               <Link
-                to={'/'}
+                to={'aboutus'}
                 className=" text-white px-3 py-2 rounded-md text-xl font-medium"
               >
                 About Us
               </Link>
               <Link
-                to={'/'}
+                to={'contact'}
                 className=" text-white px-3 py-2 rounded-md text-xl font-medium"
               >
                 Contact
@@ -108,14 +108,14 @@ const Navbar = () => {
                 type="button"
                 className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white"
               >
-                <FaShoppingCart size={20}/>
+                <FaShoppingCart size={20}/> 
               </button>
 
               <button
                 type="button"
                 className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white  ml-4"
               >
-                <FaUser size={20} />
+                <Link to={'signin'}> <FaUser size={20} /></Link>
               </button>
             </div>
           </div>
@@ -210,7 +210,7 @@ const Navbar = () => {
                 type="button"
                 className=" p-1 rounded-full text-white-400 hover:text-white  ml-4"
               >
-                <FaUser size={20} />
+                <Link to={'signin'}> <FaUser size={20} /></Link>
               </button>
             </div>
           </div>

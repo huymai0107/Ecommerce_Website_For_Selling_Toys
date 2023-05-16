@@ -8,12 +8,16 @@ import store from "./redux/store"
 import {createBrowserRouter,createRoutesFromElements,Route, RouterProvider} from 'react-router-dom'; 
 import SignIn from './pages/SignIn';
 import Signup from './pages/SignUp';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path ='/' element={<App/>} >
       <Route path='signin' element={<SignIn/>}/>
       <Route path='signup' element={<Signup/>}/>
+      <Route path='aboutus' element={<AboutUs/>}/>
+      <Route path='contact' element={<ContactUs/>}/>
     </Route>
   )
 )

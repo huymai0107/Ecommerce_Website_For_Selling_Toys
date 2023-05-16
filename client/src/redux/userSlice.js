@@ -29,3 +29,4 @@ import { createSlice } from "@reduxjs/toolkit";
     } = userSlice.actions;
     
     export default userSlice.reducer;
+    
