@@ -8,8 +8,8 @@ import { createSlice } from "@reduxjs/toolkit";
                 isFetching: false,
                 error: false
             }
+
         },
-        msg: "",
         reducers:{
             getCartStart: (state) =>{
                 state.carts.isFetching = true;

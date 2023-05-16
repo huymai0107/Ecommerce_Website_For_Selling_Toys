@@ -7,7 +7,6 @@ const authSlice = createSlice({
             isFetching:false,
             error: false,
         },
-        msg: null,
         register:{
             isFetching:false,
             error: false,

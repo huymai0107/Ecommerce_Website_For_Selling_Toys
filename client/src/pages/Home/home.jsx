@@ -3,6 +3,7 @@ import {getCart, addToCart, getAllProducts, getAllUsers } from '../../redux/apiR
 import {useDispatch, useSelector } from "react-redux"
 import {useNavigate} from "react-router-dom";
 import "./home.css"
+import Item from "../../component/Item/Item"
 // const home = () => {
 //   const dispatch = () => useDispatch();
 //   const user = useSelector((state) => state.auth.login.currentUser);
@@ -21,16 +22,16 @@ import "./home.css"
 
 
 const HomePage = () => {
-  const user = useSelector((state) => state.auth.login?.currentUser);
+  const user = useSelector((state) => state.auth.login.currentUser);
+  // console.log(user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userData = useSelector((state) => state.user.users?.allUsers);
+  // const userData = useSelector((state) => state.user.users?.allUsers);
   const productData = useSelector((state) => state.product.products?.allProducts);
   // const [productId, setproductId] = useState('');
 
   function handleAddProduct(id) {
-
     const newItem ={
       productId: id,
     }
@@ -38,35 +39,27 @@ const HomePage = () => {
 
   }
 
- //getallproducts
+//GET ALL PRODUCTS
  useEffect(() =>{
   if(!user){
-    navigate("/signin");
+    // navigate("/signin");
   }
     getAllProducts(dispatch);
  },[]);
-//getalluser
- useEffect(() =>{
-  if(!user){
-    navigate("/signin");
-  }
-  if(user?.accessToken)
-  { console.log(user.accessToken)
-    getAllUsers(user?.accessToken, dispatch);}
- },[]);
+//GET ALL USERS
+//  useEffect(() =>{
+//   if(!user){
+//     navigate("/signin");
+//   }
+//   if(user?.accessToken)
+//   { console.log(user.accessToken)
+//     getAllUsers(user?.accessToken, dispatch);}
+//  },[]);
  
-  return (
-    <main className="home-container">
+  return (<>
+    {/* <main className="home-container">
       <div className="home-title">User List</div>
       <div className="home-userlist">
-        {/* {userData?.map((user) => {
-          return (
-            <div className="user-container" key ={user._id}>
-              <div  className="home-user">{user.username}</div>
-              <div className="delete-user"> Delete </div>
-            </div>
-          );
-        })} */}
 
         {productData?.map((product) => {
           return (
@@ -77,7 +70,10 @@ const HomePage = () => {
           );
         })}
       </div>
-    </main>
+    </main> */}
+    <Item/>
+  </>
+
   );
 };
 

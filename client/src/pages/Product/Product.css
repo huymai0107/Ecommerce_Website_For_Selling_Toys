@@ -1,0 +1,16 @@
+.product-page {
+    color: red;
+  }
+  
+  .product-name {
+    font-size: 24px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+  }
+  
+  .product-description {
+    font-style: italic;
+  }
+  

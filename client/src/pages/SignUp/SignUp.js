@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./SignUp.css"
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
 import { registerUser } from '../../redux/apiRequest';
 
 const SignupForm = () => {
@@ -9,11 +9,18 @@ const SignupForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const user = useSelector((state) => state.auth.login?.currentUser);
 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  useEffect(() =>{
+    if(user)
+    {
+      navigate("/");
+    }
+   },[]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 

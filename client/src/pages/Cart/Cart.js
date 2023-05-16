@@ -11,10 +11,9 @@ const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() =>{
-        // console.log(cartData.items)
-        // console.log(user);
         if(!user){
           navigate("/signin");
+          return;
         }
           getCart(user?.others._id,dispatch);
        },[]);
@@ -23,15 +22,6 @@ const Cart = () => {
     <main className="home-container">
       <div className="home-title">User List</div>
       <div className="home-userlist">
-        {/* {userData?.map((user) => {
-          return (
-            <div className="user-container" key ={user._id}>
-              <div  className="home-user">{user.username}</div>
-              <div className="delete-user"> Delete </div>
-            </div>
-          );
-        })} */}
-
         {cartData?.items.map((cart) => {
           return (
             <div className="user-container" key ={cart._id}>
