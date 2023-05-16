@@ -67,12 +67,11 @@ const SuccessNotify = () => {
         password: password,
       };
       
-      SuccessNotify(); // Show success notification
-      
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for 3 seconds
+
       
       const response = await loginUser(newUser, dispatch, navigate);
-  
+      SuccessNotify(); // Show success notification
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for 3 seconds
       navigate("/");
     } catch (err) {
       FailNotify(err.toString().replace('Error:', ''));
