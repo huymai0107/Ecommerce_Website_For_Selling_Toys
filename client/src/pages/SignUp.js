@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ImagetoBase64 } from '../util/ImagetoBase64'; 
 import { useDispatch } from "react-redux"
 import { registerUser } from '../redux/apiRequest';
+import { Notify } from '../util/Notify';
+import { ToastContainer } from 'react-toastify';
 
 function Signup() {
   const[showPassword, setShowPassword] = useState(false)
@@ -58,7 +60,7 @@ const resetForm = () => {
   });
 };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     const{userName, email,password,confirmPassword,image} = data 
     if(email && password && confirmPassword){
@@ -74,11 +76,11 @@ const resetForm = () => {
        
       }
       else{
-        alert("Password and confirm password not the same")
+        await Notify("Password and confirm password not the same")
       }
       }
       else{
-        alert("Please enter required field")
+        await Notify("Please enter required field")
       }
     }
   return (
@@ -124,7 +126,8 @@ const resetForm = () => {
             Login
           </Link>
         </p>
-    </div> 
+    </div>
+    <ToastContainer/>  
   </div>
   
   )

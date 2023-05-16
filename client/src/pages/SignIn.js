@@ -5,6 +5,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import { loginUser } from "../redux/apiRequest";
 import { useDispatch } from "react-redux";
 import { Notify } from "../util/Notify";
+import { ToastContainer } from 'react-toastify';
 
 function SignIn() {
     const[showPassword, setShowPassword] = useState(false)
@@ -48,7 +49,7 @@ function SignIn() {
         resetForm();
         }
         else{
-        await Notify("Please enter required field")
+         await Notify("Please enter required field")
         }
       }  
   return (
@@ -100,6 +101,7 @@ function SignIn() {
         </Link>
       </p>
     </div>
+    <ToastContainer/> 
     </div>
   )
 }
