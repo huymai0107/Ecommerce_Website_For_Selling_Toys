@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from '../redux/apiRequest';
 import { clearCart } from '../redux/apiRequest';
@@ -181,6 +181,7 @@ const CheckOut = () => {
       />
     </div>
     <div className="flex justify-center">
+    <Link to={'order'}> 
       <button
         onClick={() =>
           handleFormSubmit(
@@ -192,7 +193,7 @@ const CheckOut = () => {
         className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2"
       >
         Submit
-      </button>
+      </button></Link> 
     </div>
   </div>
 </div>
