@@ -10,10 +10,12 @@ import SignIn from './pages/SignIn';
 import Signup from './pages/SignUp';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import Home from './pages/Home';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path ='/' element={<App/>} >
+      <Route path='' element={<Home/>}/>
       <Route path='signin' element={<SignIn/>}/>
       <Route path='signup' element={<Signup/>}/>
       <Route path='aboutus' element={<AboutUs/>}/>
