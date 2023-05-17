@@ -8,8 +8,8 @@ import { createSlice } from "@reduxjs/toolkit";
                 isFetching: false,
                 error: false
             }
+
         },
-        msg: "",
         reducers:{
             getCartStart: (state) =>{
                 state.carts.isFetching = true;
@@ -33,12 +33,38 @@ import { createSlice } from "@reduxjs/toolkit";
             addCartFailed: (state) =>{
                 state.carts.isFetching = false;
                 state.carts.error = true;
+            },
+            //
+            clearCartStart: (state) =>{
+                state.carts.isFetching = true;
+            },
+            clearCartSuccess: (state, action) =>{
+                state.carts.isFetching = false;
+                state.carts.allCarts = action.payload;
+            },
+            clearCartFailed: (state) =>{
+                state.carts.isFetching = false;
+                state.carts.error = true;
+            },
+            //
+            rmItemCartStart: (state) =>{
+                state.carts.isFetching = true;
+            },
+            rmItemCartSuccess: (state, action) =>{
+                state.carts.isFetching = false;
+                state.carts.allCarts = action.payload;
+            },
+            rmItemCartFailed: (state) =>{
+                state.carts.isFetching = false;
+                state.carts.error = true;
             }
+            
+
         }
     })
 
     export const {
-        getCartStart, getCartSuccess, getCartFailed, addCartFailed, addCartStart, addCartSuccess
+        getCartStart, getCartSuccess, getCartFailed, addCartFailed, addCartStart, addCartSuccess, clearCartFailed, clearCartSuccess,clearCartStart, rmItemCartFailed, rmItemCartStart,rmItemCartSuccess
     } = cartSlice.actions;
     
     export default cartSlice.reducer;
