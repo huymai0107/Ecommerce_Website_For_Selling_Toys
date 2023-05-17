@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import loginSignupImage from '../assest/person.png'
 import {BiShow, BiHide} from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { ImagetoBase64 } from '../util/ImagetoBase64'; 
 import { useDispatch, useSelector} from "react-redux"
 import { registerUser } from '../redux/apiRequest';
-import { Notify } from '../util/Notify';
+import { warn } from '../util/Warn';
+import { success } from '../util/Success';
 import { ToastContainer } from 'react-toastify';
 
 function Signup() {
@@ -22,6 +23,13 @@ function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
   const user = useSelector((state) => state.auth.login?.currentUser);
+  useEffect(() =>{
+    if(user)
+    {
+      navigate("/");
+    }
+   },[]);
+
 
   const [data, setData] = useState({
     userName: "",
@@ -72,16 +80,16 @@ const resetForm = () => {
           password: password,
           image:image
         }
-        registerUser(newUser,dispatch, navigate); 
+        registerUser(newUser,dispatch, navigate);
+        await success("Successfully register") 
         resetForm();
-       
       }
       else{
-        await Notify("Password and confirm password not the same")
+        await warn("Password and confirm password not the same")
       }
       }
       else{
-        await Notify("Please enter required field")
+        await warn("Please enter required field")
       }
     }
   return (
@@ -123,7 +131,7 @@ const resetForm = () => {
         </form>
         <p className="text-left text-sm mt-2">
           Already have account ?{" "}
-          <Link to={"/login"} className="text-red-500 underline">
+          <Link to={"/signin"} className="text-red-500 underline">
             Login
           </Link>
         </p>

@@ -1,76 +1,143 @@
-import React, {useEffect}from 'react'
+import {  AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
+import { Component } from "react";
+import React, { useEffect, useState } from 'react'
+import styled from "styled-components";
+import {useDispatch, useSelector } from "react-redux"
 import {Link,useNavigate} from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
-import { Notify } from '../../util/Notify';
+import { warn } from '../../util/Warn';
 import {
   getCart,
   addToCart,
   getAllProducts,
   getAllUsers,
 } from "../../redux/apiRequest"; 
-import { useDispatch,useSelector } from 'react-redux';
-const Item = () => {
+import { success } from '../../util/Success';
+const Container = styled.div`
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+`;
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const productData = useSelector((state) => state.product.products?.allProducts);
-  const user = useSelector((state) => state.auth.login?.currentUser);
+const Info = styled.div`
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  cursor: pointer;
+`;
 
-  //HANDLE ADD PRODUCT TO CART
-  function handleAddProduct(id) {
-    const newItem = {
-      productId: id,
-    };
-    if (!user) {
-      navigate("/signin");
-    } else {
-      if (user?.accessToken) {
-        addToCart(user.accessToken, user.others._id, newItem, dispatch, navigate);
-        Notify("success")
-      } else {
-        Notify("Failed")
-      }
-    }
+const ContainerForEachItems = styled.div`
+  flex: 1;
+  margin: 5px;
+  min-width: 280px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5fbfd;
+  position: relative;
+  &:hover ${Info}{
+    opacity: 1;
   }
+`;
 
-   //GET ALL PRODUCTS
-   useEffect(() => {
-    getAllProducts(dispatch);
-  }, []);
-  
+const Circle = styled.div`
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+`;
 
-  return (
-    <>
-      <div className="p-20 flex flex-wrap justify-between">
-        {productData?.map((item) => (
-          <div
-            key={item._id}
-            className="flex flex-col items-center justify-center m-5 w-72 h-80 bg-gray-100 relative"
-          >
-            <div className="w-52 h-52 rounded-full bg-white absolute"></div>
-            {/* <img className="h-3/4 z-2" src={item.photo} alt={item.name} /> */}
-            <div className=" w-full h-full absolute top-0 left-0 bg-white bg-opacity-20 flex items-center justify-center transition-all duration-500 cursor-pointer">
-              <div className="flex justify-center space-x-4">
-                <div
-                  onClick={() => handleAddProduct(item._id)}
-                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center transition-all duration-500 hover:bg-blue-100"
-                >
-                  <AiOutlineShoppingCart className='w-10 h-8'/>
-                </div>
-                <Link to={`/product/${item._id}`}>
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center transition-all duration-500 hover:bg-blue-100">
-                    <AiOutlineSearch  className='w-10 h-8'/> 
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <ToastContainer />
-    </>
-  )
-}
+const Image = styled.img`
+  height: 75%;
+  z-index: 2;
+`;
 
-export default Item
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  transition: all 0.5s ease;
+  &:hover {
+    background-color: #e9f5f5;
+    transform: scale(1.1);
+  }
+`;
+
+const Item = () => {
+        const dispatch = useDispatch();
+        const navigate = useNavigate();
+        const productData = useSelector((state) => state.product.products?.allProducts);
+        const user = useSelector((state) => state.auth.login?.currentUser);
+        
+        //HANDLE ADD PRODUCT TO CART
+        function handleAddProduct(id) {
+            const newItem ={
+                productId: id,
+              }
+            if(!user)
+            {
+                navigate("/signin");
+            }
+            else {
+                  if(user?.accessToken)
+                    {   
+                    addToCart(user.accessToken,user.others._id,newItem,dispatch, navigate,)
+                    success("Added");}
+                else {
+                    warn("Fail added");
+                }
+            }
+          }
+        //GET ALL PRODUCTS
+        useEffect(() =>{
+            getAllProducts(dispatch);
+        },[]);
+        return (
+<>
+            <Container>
+              {productData?.map((item) => (
+                
+                    <ContainerForEachItems key={item._id}>
+                    <Circle />
+                    {/* <Image src={item.photo} /> */}
+                    <Info>                     
+                      <Icon onClick={() => handleAddProduct(item._id)}>
+                       <AiOutlineShoppingCart/>
+                      </Icon>
+                        <Link to={`/product/${item._id}`}>
+                            <Icon >
+                           <AiOutlineSearch/>
+                            </Icon>
+                        </Link>
+                    </Info>
+                  </ContainerForEachItems>
+              ))}
+            </Container>
+            <ToastContainer/>
+</>
+
+          );
+    }
+
+    
+
+
+
+export default Item;

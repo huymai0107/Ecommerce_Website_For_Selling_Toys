@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-async function  Notify(note){
-    toast.warn(note, {
+async function success(note){
+    toast.success(note, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -11,8 +11,8 @@ async function  Notify(note){
         draggable: true,
         progress: undefined,
         theme: "light",
-        toastId: 2
-
+        toastId: 1
         });
+
 };
-export {Notify}
+export {success}

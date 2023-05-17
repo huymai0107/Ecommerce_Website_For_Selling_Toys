@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loginSignupImage from "../assest/person.png";
 import { BiShow, BiHide } from "react-icons/bi";
 import { loginUser } from "../redux/apiRequest";
-import { useDispatch } from "react-redux";
-import { Notify } from "../util/Notify";
+import { useDispatch, useSelector} from "react-redux";
+import { warn } from "../util/Warn";
 import { ToastContainer } from 'react-toastify';
 
 function SignIn() {
@@ -15,7 +15,14 @@ function SignIn() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch(); 
-  
+    const user = useSelector((state) => state.auth.login?.currentUser);
+    useEffect(() =>{
+      if(user)
+      {
+        navigate("/");
+      }
+     },[]);
+
     const [data, setData] = useState({
       email: "",
       password: "",
@@ -47,10 +54,10 @@ function SignIn() {
         }
         loginUser(newUser,dispatch, navigate);
         resetForm();
-        navigate("/")
+        navigate('/')
         }
         else{
-         await Notify("Please enter required field")
+        await warn("Please enter required field")
         }
       }  
   return (

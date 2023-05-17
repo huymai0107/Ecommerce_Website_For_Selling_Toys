@@ -3,14 +3,16 @@ import authReducer from "./authSlice"
 import userReducer from "./userSlice"
 import productReducer from "./productSlice"
 import cartReducer from "./cartSlice"
-import getProductSlice from "./getProductSlice"
-
+import getProductReducer from "./getProductSlice"
+import orderReducer from "./orderSlice"
 export default configureStore({
     reducer:{
         auth: authReducer,
         user: userReducer,
         product: productReducer,
         cart: cartReducer,
-        theproduct:getProductSlice, 
+        theproduct: getProductReducer,
+        order: orderReducer
+
     }
 })

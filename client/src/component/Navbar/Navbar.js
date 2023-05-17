@@ -109,7 +109,7 @@ const Navbar = () => {
                 type="button"
                 className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white"
               >
-                <FaShoppingCart size={20}/> 
+                <Link to={'cart'}><FaShoppingCart size={20}/> </Link> 
               </button>
 
               {user ? 
@@ -123,15 +123,15 @@ const Navbar = () => {
                   <ul className="absolute z-10 right-10 mt-2 w-36 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                     <div className="flex">
                       <Link
-                        to="/"
+                         to= {'order'}
                         className="px-12 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       >
-                        Profile
+                        Order
                       </Link>
                     </div>
                     <div className="flex">
                       <Link
-                        to="/"
+                        to= {''}
                         className="px-12 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       >
                        LogOut
