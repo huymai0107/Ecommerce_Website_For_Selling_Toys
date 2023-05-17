@@ -4,26 +4,24 @@ const jwt = require("jsonwebtoken");
 const Cart = require("../models/Cart");
 
 let refreshTokens = [];
-
 const authController = {
   //REGISTER
   registerUser: async (req, res) =>{
-    const newCustomer = new User({        
+    const newUser = new User({        
         username: req.body.username,
         email: req.body.email,
-        password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SECRET),
-        image: req.body.image
+        password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SECRET) 
     });
     const newCart = new Cart({
-      userId: newCustomer._id
+      userId: newUser._id
     })
-    // try{
-        const savedCustomer = await newCustomer.save();
+    try{
+        const savednewUser = await newUser.save();
         const savedCart = await newCart.save();
-        return res.status(201).json({savedCustomer}).json({savedCart})
-    // } catch(err){
-    //     return res.status(500).json({err})
-    // }
+        return res.status(201).json({savednewUser})
+    } catch(err){
+        return res.status(500).json({err})
+    }
 },
 
   generateAccessToken: (user) => {

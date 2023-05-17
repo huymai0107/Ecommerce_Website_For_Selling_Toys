@@ -22,7 +22,6 @@ function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
   const user = useSelector((state) => state.auth.login?.currentUser);
-  console.log(user)
 
   const [data, setData] = useState({
     userName: "",

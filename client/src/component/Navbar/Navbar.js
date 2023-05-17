@@ -20,7 +20,6 @@ const Navbar = () => {
   const toggleUser = () => setUser(!isUser)
 
   const user = useSelector((state) => state.auth.login?.currentUser);
-
   return (
     <nav className="sticky top-0 bg-red-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,26 +113,34 @@ const Navbar = () => {
               </button>
 
               {user ? 
-              ( <button
+              (<button
                     type="button"
-                    className="bg-red-500 p-1 rounded-full text-white hover:text-white ml-4"
+                    className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white ml-4"
                     onClick={toggleUser}
                   >
                     <FaUser size={20} />
                 {isUser &&(
-                  <ul className="absolute z-10 right-10 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <ul className="absolute z-10 right-10 mt-2 w-36 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                     <div className="flex">
                       <Link
                         to="/"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        className="px-12 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       >
                         Profile
+                      </Link>
+                    </div>
+                    <div className="flex">
+                      <Link
+                        to="/"
+                        className="px-12 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                       LogOut
                       </Link>
                     </div>
                   </ul>
                 )}
                 </button>)
-              :(
+              :( 
                 <button
                 type="button"
                 className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white  ml-4"
