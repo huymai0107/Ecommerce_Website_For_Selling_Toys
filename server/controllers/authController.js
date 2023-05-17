@@ -18,7 +18,7 @@ const authController = {
     try{
         const savednewUser = await newUser.save();
         const savedCart = await newCart.save();
-        return res.status(201).json({savednewUser}).json({savedCart})
+        return res.status(201).json({savednewUser})
     } catch(err){
         return res.status(500).json({err})
     }
