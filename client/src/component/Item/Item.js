@@ -10,6 +10,8 @@ import {getCart, addToCart, getAllProducts, getAllUsers } from '../../redux/apiR
 import {useDispatch, useSelector } from "react-redux"
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
     padding: 20px;
@@ -83,8 +85,34 @@ const Item = () => {
         const navigate = useNavigate();
         const productData = useSelector((state) => state.product.products?.allProducts);
         const user = useSelector((state) => state.auth.login?.currentUser);
+        const SuccessNotify = () => {
+            toast.success('Successfully Added', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                toastId: 1
+          
+                });}
+                const FailNotify = () => {
+                    toast.success(' Added Fail', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        toastId: 1
+                  
+                        });}
         // console.log(user)
-
+        
         //HANDLE ADD PRODUCT TO CART
         function handleAddProduct(id) {
             const newItem ={
@@ -95,16 +123,21 @@ const Item = () => {
                 navigate("/signin");
             }
             else {
-                addToCart(user.others._id,newItem,dispatch, navigate,)
+                  if(user?.accessToken)
+                    {   
+                    addToCart(user.accessToken,user.others._id,newItem,dispatch, navigate,)
+                    SuccessNotify();}
+                else {
+                    FailNotify();
+                }
             }
-
           }
         //GET ALL PRODUCTS
         useEffect(() =>{
             getAllProducts(dispatch);
         },[]);
         return (
-
+<>
             <Container>
               {productData?.map((item) => (
                 
@@ -124,6 +157,8 @@ const Item = () => {
                   </ContainerForEachItems>
               ))}
             </Container>
+            <ToastContainer/>
+</>
 
           );
     }

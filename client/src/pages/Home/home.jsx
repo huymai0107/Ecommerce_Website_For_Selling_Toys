@@ -46,13 +46,13 @@ const HomePage = () => {
   }
     getAllProducts(dispatch);
  },[]);
-//GET ALL USERS
+// GET ALL USERS
 //  useEffect(() =>{
 //   if(!user){
 //     navigate("/signin");
 //   }
 //   if(user?.accessToken)
-//   { console.log(user.accessToken)
+//   { 
 //     getAllUsers(user?.accessToken, dispatch);}
 //  },[]);
  

@@ -3,7 +3,7 @@ import { loginFailed, loginStart, loginSuccess, registerFailed, registerStart, r
 import { getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice";
 import { getProductsFailed, getProductsStart, getProductsSuccess } from "./productSlice";
 import 
-{getCartFailed, getCartStart, getCartSuccess, addCartFailed, addCartStart, addCartSuccess
+{getCartFailed, getCartStart, getCartSuccess, addCartFailed, addCartStart, addCartSuccess, clearCartFailed, clearCartSuccess, clearCartStart, rmItemCartFailed, rmItemCartStart,rmItemCartSuccess
 } from "./cartSlice"
 import { gettheproductFailed, gettheproductStart,gettheproductSuccess } from "./theSpecificProductSiice";
 
@@ -13,9 +13,7 @@ export const loginUser = async(user, dispatch, navigate) => {
     try {
         const res = await axios.post("http://localhost:8080/auth/login", user)  
           dispatch(loginSuccess(res.data));
-        navigate("/")
     } catch (err) {
-        // alert(err.response.data)
         dispatch(loginFailed());
         throw new Error(err.response.data);
 
@@ -59,12 +57,13 @@ export const getAllUsers = async (accesstoken, dispatch) =>{
         dispatch(getProductsFailed());
     }
 }
-
-export const addToCart = async (userid,productid, dispatch, navigate) =>{
+//CART
+export const addToCart = async (accesstoken,userid,productid, dispatch, navigate) =>{
     dispatch(addCartStart());
-    // console.log(productid.toString());
     try{
-        const res = await axios.post("http://localhost:8080/cart/" + userid,productid   
+        const res = await axios.post("http://localhost:8080/cart/" + userid,productid,{
+            headers: {token:`Bearer ${accesstoken}`}
+        }   
         )
         dispatch(addCartSuccess(res.data))
     }catch(err){
@@ -72,12 +71,12 @@ export const addToCart = async (userid,productid, dispatch, navigate) =>{
     }
 }
 
-export const getCart = async (userid,dispatch) =>{
+export const getCart = async (userid,accesstoken,dispatch) =>{
     dispatch(getCartStart());
     // console.log(accesstoken);
     try{
         const res = await axios.get("http://localhost:8080/cart/" + userid,{
-            // headers: {token:`Bearer ${accesstoken}`}
+            headers: {token:`Bearer ${accesstoken}`}
         })
         dispatch(getCartSuccess(res.data))
     }catch(err){
@@ -85,6 +84,32 @@ export const getCart = async (userid,dispatch) =>{
     }
 }
 
+export const clearCart = async (accesstoken,userid,dispatch) =>{
+    dispatch(clearCartStart());
+    // console.log(accesstoken);
+    try{
+        const res = await axios.delete("http://localhost:8080/cart/" + userid,{
+            headers: {token:`Bearer ${accesstoken}`}
+        })
+        dispatch(clearCartSuccess(res.data))
+    }catch(err){
+        dispatch(clearCartFailed());
+    }
+}
+export const rmItemCart = async (accesstoken,userid,itemid,dispatch) =>{
+    dispatch(rmItemCartStart());
+    try{
+        const res = await axios.delete("http://localhost:8080/cart/" + userid +"/"+itemid.id.toString(),{
+            headers: {token:`Bearer ${accesstoken}`}
+        })
+        dispatch(rmItemCartSuccess(res.data))
+    }catch(err){
+        dispatch(rmItemCartFailed());
+    }
+}
+
+
+//PRODUCT
 export const getProductById = async (id,dispatch) =>{
     dispatch(gettheproductStart());
     // console.log(accesstoken);
@@ -99,3 +124,4 @@ export const getProductById = async (id,dispatch) =>{
         dispatch(gettheproductFailed());
     }
 }
+

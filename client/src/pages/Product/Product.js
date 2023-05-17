@@ -59,6 +59,7 @@ const Product = () => {
     async function handleAddProduct(id) {
         const newItem ={
             productId: id,
+            quantity: selectedNumber
           }
         if(!user)
             {
@@ -68,8 +69,10 @@ const Product = () => {
             }
         else {
             {
-                addToCart(user?.others._id,newItem,dispatch, navigate,)
-                SuccessNotify();
+                if(user?.accessToken)
+                {   
+                addToCart(user.accessToken,user.others._id,newItem,dispatch, navigate,)
+                SuccessNotify();}
             }
                 
         }
@@ -92,7 +95,7 @@ const Product = () => {
             <option value="1" name="test">Select a number</option>
             {numberOptions}
         </select>
-      <button onClick={() => handleAddProduct(theproductData._id,test)}> add </button>
+      <button onClick={() => handleAddProduct(theproductData._id)}> add </button>
 
       <ToastContainer/>
     </div>

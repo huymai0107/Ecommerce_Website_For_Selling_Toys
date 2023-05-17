@@ -62,18 +62,17 @@ const SuccessNotify = () => {
     e.preventDefault();
     
     try {
+      
       const newUser = {
         username: username,
         password: password,
       };
-      
-
-      
       const response = await loginUser(newUser, dispatch, navigate);
       SuccessNotify(); // Show success notification
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for 3 seconds
       navigate("/");
     } catch (err) {
+      setError(err.toString().replace('Error:',''))
       FailNotify(err.toString().replace('Error:', ''));
     }
   };
@@ -111,7 +110,7 @@ const SuccessNotify = () => {
         />
       </div>
       <button type="submit" className="signin-button">Sign in</button>
-      {/* {error?<label className="signup-link">{error}</label>:null}           */}
+      {error?<label className="signup-link">{error}</label>:null}          
 
       <p className="signup-link">Don't have an account? <Link to="/signup">Signup</Link></p>
 
