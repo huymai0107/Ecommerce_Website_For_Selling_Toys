@@ -109,7 +109,7 @@ const CheckOut = () => {
     }
           createOrder(user.accessToken,newItem,dispatch)
           clearCart(user.accessToken,user.others._id,dispatch, navigate)
-
+          navigate("/")
 
     
     // Validate the form fields and handle the form submission

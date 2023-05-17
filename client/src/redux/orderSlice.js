@@ -22,6 +22,18 @@ import { createSlice } from "@reduxjs/toolkit";
                 state.orders.isFetching = false;
                 state.orders.error = true;
             },
+
+            gettheOrderStart: (state) =>{
+                state.orders.isFetching = true;
+            },
+            gettheOrderSuccess: (state, action) =>{
+                state.orders.isFetching = false;
+                state.orders.allOrders = action.payload;
+            },
+            gettheOrderFailed: (state) =>{
+                state.orders.isFetching = false;
+                state.orders.error = true;
+            },
             //
             addOrderStart: (state) =>{
                 state.orders.isFetching = true;
@@ -72,7 +84,10 @@ import { createSlice } from "@reduxjs/toolkit";
         addOrderSuccess,
         updateOrderFailed,
         updateOrderStart,
-        updateOrderSuccess
+        updateOrderSuccess,
+        gettheOrderFailed,
+        gettheOrderStart,
+        gettheOrderSuccess
     } = orderSlice.actions;
     
     export default orderSlice.reducer;
