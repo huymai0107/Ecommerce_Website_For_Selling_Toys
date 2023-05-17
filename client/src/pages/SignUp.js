@@ -3,7 +3,7 @@ import loginSignupImage from '../assest/person.png'
 import {BiShow, BiHide} from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { ImagetoBase64 } from '../util/ImagetoBase64'; 
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
 import { registerUser } from '../redux/apiRequest';
 import { Notify } from '../util/Notify';
 import { ToastContainer } from 'react-toastify';
@@ -21,7 +21,9 @@ function Signup() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
-  
+  const user = useSelector((state) => state.auth.login?.currentUser);
+  console.log(user)
+
   const [data, setData] = useState({
     userName: "",
     email: "",

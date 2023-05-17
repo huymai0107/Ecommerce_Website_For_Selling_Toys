@@ -11,14 +11,16 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setMenuIsOpen] = useState(false);
+  const [isUser,setUser] = useState(false)
 
   const [searchTerm, setSearchTerm] = useState("");
 
   const toggleMenu = () => setMenuIsOpen(!isMenuOpen);
   const toggleProduct = () => setIsOpen(!isOpen);
+  const toggleUser = () => setUser(!isUser)
 
-  const currentUser = useSelector((state) => state.user.currentUser);
-  console.log(currentUser)
+  const user = useSelector((state) => state.auth.login?.currentUser);
+
   return (
     <nav className="sticky top-0 bg-red-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,15 +113,41 @@ const Navbar = () => {
                 <FaShoppingCart size={20}/> 
               </button>
 
+              {user ? 
+              ( <button
+                    type="button"
+                    className="bg-red-500 p-1 rounded-full text-white hover:text-white ml-4"
+                    onClick={toggleUser}
+                  >
+                    <FaUser size={20} />
+                {isUser &&(
+                  <ul className="absolute z-10 right-10 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div className="flex">
+                      <Link
+                        to="/"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        Profile
+                      </Link>
+                    </div>
+                  </ul>
+                )}
+                </button>)
+              :(
+                <button
+                type="button"
+                className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white  ml-4"
+                ><Link to={'signin'}> <FaUser size={20} /></Link></button>
+              )
+              }
               <button
                 type="button"
                 className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white  ml-4"
               >
-                <Link to={'signin'}> <FaUser size={20} /></Link>
               </button>
             </div>
           </div>
-
+            
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={toggleMenu}

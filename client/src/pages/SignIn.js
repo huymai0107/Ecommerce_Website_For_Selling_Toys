@@ -47,6 +47,7 @@ function SignIn() {
         }
         loginUser(newUser,dispatch, navigate);
         resetForm();
+        navigate("/")
         }
         else{
          await Notify("Please enter required field")
