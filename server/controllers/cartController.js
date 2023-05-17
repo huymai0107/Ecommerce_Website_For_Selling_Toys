@@ -31,7 +31,7 @@ const cartController = {
   },
 
   removeItem: async (req, res) => {
-    try {
+    // try {
       const userId = req.params.userId;
       const itemId = req.params.itemId;
       const cart = await Cart.findOneAndUpdate(
@@ -40,9 +40,9 @@ const cartController = {
         { new: true }
       ).populate('items.productId');
       res.json(cart);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
+    // } catch (error) {
+    //   res.status(500).json({ error: 'Internal server error' });
+    // }
   },
 
   // clearCart: async (req, res) => {
