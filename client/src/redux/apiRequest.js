@@ -6,6 +6,7 @@ import
 {getCartFailed, getCartStart, getCartSuccess, addCartFailed, addCartStart, addCartSuccess, clearCartFailed, clearCartSuccess, clearCartStart, rmItemCartFailed, rmItemCartStart,rmItemCartSuccess
 } from "./cartSlice"
 import { gettheproductFailed, gettheproductStart,gettheproductSuccess } from "./theSpecificProductSiice";
+import { addOrderFailed, addOrderStart, addOrderSuccess, getOrderFailed, getOrderStart, getOrderSuccess } from "./orderSlice";
 
 export const loginUser = async(user, dispatch, navigate) => {
     
@@ -125,3 +126,29 @@ export const getProductById = async (id,dispatch) =>{
     }
 }
 
+//ORDER
+export const getOrder = async (accesstoken,userid,dispatch) =>{
+    dispatch(getOrderStart());
+    console.log(userid);
+    try{
+        const res = await axios.get("http://localhost:8080/order/" + userid.toString(),{
+            headers: {token:`Bearer ${accesstoken}`}
+        })
+        dispatch(getOrderSuccess(res.data))
+    }catch(err){
+        dispatch(getOrderFailed());
+    }
+}
+
+export const createOrder = async (accesstoken,body,dispatch) =>{
+    dispatch(addOrderStart());
+    try{
+        const res = await axios.post("http://localhost:8080/order/",body,{
+            headers: {token:`Bearer ${accesstoken}`}
+        }   
+        )
+        dispatch(addOrderSuccess(res.data))
+    }catch(err){
+        dispatch(addOrderFailed());
+    }
+}

@@ -10,7 +10,6 @@ const Cart = () => {
     const cartData = useSelector((state) => state.cart.carts?.allCarts);
     const productData = useSelector((state) => state.product.products?.allProducts);
     const [error,setError]=useState();
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() =>{
@@ -18,7 +17,6 @@ const Cart = () => {
           navigate("/signin");
           return;
         }
-        // try {
           if(user?.accessToken)
           getCart(user?.others._id,user?.accessToken,dispatch);
        },[]);
@@ -39,6 +37,13 @@ const Cart = () => {
                   rmItemCart(user.accessToken,user.others._id,newItem,dispatch)
           }
         }
+        function handleCheckout() {
+          // Construct the checkout URL with user ID and cart items
+          const checkoutUrl = `/checkout/?userId=${user?.others._id}&items=${JSON.stringify(cartData?.items)}`;
+          
+          // Navigate to the checkout form
+          navigate(checkoutUrl);
+        }
              
   return (
     <main>
@@ -56,7 +61,7 @@ const Cart = () => {
           );
         })}
         <button onClick={() => handleClearCart()}>clearCart</button>
-
+        <Button variant="contained" onClick={() => handleCheckout()}>Checkout</Button>
       </div>
     </main>
   )

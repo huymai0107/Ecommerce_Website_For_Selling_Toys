@@ -64,7 +64,18 @@ import { createSlice } from "@reduxjs/toolkit";
     })
 
     export const {
-        getCartStart, getCartSuccess, getCartFailed, addCartFailed, addCartStart, addCartSuccess, clearCartFailed, clearCartSuccess,clearCartStart, rmItemCartFailed, rmItemCartStart,rmItemCartSuccess
+        getCartStart, 
+        getCartSuccess, 
+        getCartFailed, 
+        addCartFailed, 
+        addCartStart, 
+        addCartSuccess, 
+        clearCartFailed, 
+        clearCartSuccess,
+        clearCartStart, 
+        rmItemCartFailed, 
+        rmItemCartStart,
+        rmItemCartSuccess
     } = cartSlice.actions;
     
     export default cartSlice.reducer;

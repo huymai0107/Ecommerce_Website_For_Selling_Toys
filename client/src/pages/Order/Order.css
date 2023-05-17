@@ -1,12 +1,33 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
+.order-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .order-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .order-item {
+    margin-bottom: 20px;
+  }
+  
+  .order-item h2 {
+    font-size: 20px;
+  }
+  
+  .order-item h3 {
+    font-size: 18px;
+  }
+  
+  .order-item ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  .order-item li {
+    margin-bottom: 5px;
+  }
+  

@@ -2,38 +2,38 @@ const Order = require('../models/Order');
 
 const orderController = {
   createOrder: async (req, res) => {
-    try {
-      const { userId, cartId, deliveryInformation } = req.body;
+    // try {
+      const { userId, items, deliveryInformation } = req.body;
 
       const newOrder = new Order({
         userId,
-        cartId,
+        items,
         deliveryInformation
       });
 
       const savedOrder = await newOrder.save();
 
       res.status(201).json(savedOrder);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
+    // } catch (error) {
+    //   res.status(500).json({ error: 'Internal server error' });
+    // }
   },
 
-  getOrder: async (req, res) => {
+  getOrders: async (req, res) => {
     try {
-      const orderId = req.params.orderId;
-
-      const order = await Order.findById(orderId);
-
-      if (order) {
-        res.json(order);
+      const userId = req.params.userId;
+      const orders = await Order.find({ userId: userId });
+  
+      if (orders) {
+        res.json(orders);
       } else {
-        res.status(404).json({ error: 'Order not found' });
+        res.status(404).json({ error: 'No orders found for this user' });
       }
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
   },
+  
 
   updateOrder: async (req, res) => {
     try {
