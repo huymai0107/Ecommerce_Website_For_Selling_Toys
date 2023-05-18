@@ -17,7 +17,6 @@ const CheckOut = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const userId = searchParams.get('userId');
-  const items = JSON.parse(searchParams.get('items'));
 
   useEffect(() => {
     callAPI(`${host}?depth=1`);
@@ -92,7 +91,7 @@ const CheckOut = () => {
       setResult(result);
     }
   };
-
+  const cartData = useSelector((state) => state.cart.carts?.allCarts);
   const user = useSelector((state) => state.auth.login?.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -104,7 +103,7 @@ const CheckOut = () => {
     console.log(Name, Address, phoneNumber);
     const newItem = {
       userId: user.others._id,
-      items: items,
+      items: cartData?.items,
       deliveryInformation: {
         name: Name,
         address: Address,
@@ -181,7 +180,6 @@ const CheckOut = () => {
       />
     </div>
     <div className="flex justify-center">
-    <Link to={'order'}> 
       <button
         onClick={() =>
           handleFormSubmit(
@@ -193,7 +191,7 @@ const CheckOut = () => {
         className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2"
       >
         Submit
-      </button></Link> 
+      </button>
     </div>
   </div>
 </div>
