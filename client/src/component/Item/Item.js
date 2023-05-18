@@ -122,7 +122,7 @@ const Item = () => {
 <>
             <Container>
               {productData?.map((item) => {
-                const base64String = convertBufferToBase64(item.img.data.data);
+                const base64String = convertBufferToBase64(item.img.data?.data);
 
                 return(
                 

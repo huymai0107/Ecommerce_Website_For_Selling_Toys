@@ -14,7 +14,7 @@ const Image = styled.img`
   z-index: 2;
 `;
 function Product() {
-  const [selectedNumber, setSelectedNumber] = useState('');
+  const [selectedNumber, setSelectedNumber] = useState('1');
   const handleNumberChange = (event) => {
     setSelectedNumber(event.target.value);
   };
@@ -32,6 +32,9 @@ function Product() {
   const navigate = useNavigate();
 
   async function handleAddProduct(id) {
+    if(selectedNumber === null){
+      setSelectedNumber(1);
+    }
     const newItem = {
       productId: id,
       quantity: selectedNumber,
@@ -84,7 +87,7 @@ function Product() {
               <span>{selectedNumber}</span>
               <button
                 className="px-2 py-1 bg-gray-200 text-gray-500 rounded-md"
-                onClick={() => setSelectedNumber(parseInt(selectedNumber+1))}
+                onClick={() => setSelectedNumber(parseInt(selectedNumber) + 1)}
               >
                 <AiOutlinePlus className="h-4 w-4" />
               </button>
