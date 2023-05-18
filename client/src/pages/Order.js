@@ -30,6 +30,9 @@ const Order = () => {
               <p className="mb-2">Address: {order.deliveryInformation.address}</p>
               <p className="mb-2">Phone Number: {order.deliveryInformation.phoneNumber}</p>
               <p className="mb-2">Condition: {order.condition}</p>
+              <p className="mb-2">CreateAt: {order.createdAt}</p>
+
+
             </div>
             <div className="mt-4">
               <h3 className="font-bold">Items:</h3>

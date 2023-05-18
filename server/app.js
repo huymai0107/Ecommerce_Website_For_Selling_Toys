@@ -7,9 +7,12 @@ const cart = require('./routes/cart');
 const product = require('./routes/product');
 const order = require('./routes/order')
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 dotenv.config();
 const app = express();
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 const corsOptions ={
     origin:'http://localhost:3000', 
     credentials:true,            //access-control-allow-credentials:true

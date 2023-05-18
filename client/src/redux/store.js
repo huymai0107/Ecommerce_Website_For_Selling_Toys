@@ -14,5 +14,9 @@ export default configureStore({
         theproduct: getProductReducer,
         order: orderReducer
 
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        immutableCheck: false,
+        serializableCheck: false,
+      })
 })
