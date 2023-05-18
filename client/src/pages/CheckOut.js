@@ -132,6 +132,8 @@ const CheckOut = () => {
         value={selectedProvince.code || ''}
         onChange={handleProvinceChange}
         className="border border-gray-300 rounded px-4 py-2"
+        style={{ width: '50%' }}
+
       >
         <option value="">Province</option>
         {provinces.map((province) => (
@@ -144,6 +146,8 @@ const CheckOut = () => {
         value={selectedDistrict.code || ''}
         onChange={handleDistrictChange}
         className="border border-gray-300 rounded px-4 py-2"
+        style={{ width: '50%' }}
+
       >
         <option value="">District</option>
         {districts.map((district) => (
@@ -156,6 +160,8 @@ const CheckOut = () => {
         value={selectedWard.code || ''}
         onChange={handleWardChange}
         className="border border-gray-300 rounded px-4 py-2"
+        style={{ width: '50%' }}
+
       >
         <option value="">Ward</option>
         {wards.map((ward) => (

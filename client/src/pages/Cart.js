@@ -95,7 +95,7 @@ const Cart = () => {
           );
         })}
         <div className="flex justify-between items-center">
-  {cartData.items.length > 0 ? (
+  {cartData?.items.length > 0 ? (
     <>
       <button
         className="px-4 py-2 bg-red-500 text-white rounded-lg"
