@@ -129,7 +129,6 @@ export const getProductById = async (id,dispatch) =>{
 //ORDER
 export const getOrder = async (accesstoken,userid,dispatch) =>{
     dispatch(getOrderStart());
-    console.log(userid);
     try{
         const res = await axios.get("http://localhost:8080/order/" + userid.toString(),{
             headers: {token:`Bearer ${accesstoken}`}

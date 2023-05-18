@@ -15,7 +15,11 @@ const Order = () => {
     }
     getOrder(user?.accessToken, user?.others._id, dispatch);
   }, []);
-
+  function convertTimestampToRealTime(timestamp) {
+    const date = new Date(timestamp * 1000); // Multiply by 1000 to convert from seconds to milliseconds
+    const realTime = date.toLocaleString(); // Converts the date to a string representation based on the user's locale
+    return realTime;
+  }
   return (
     <div className="container mx-auto p-10">
       <h1 className="text-3xl font-bold mb-8">Order Information</h1>
@@ -30,9 +34,7 @@ const Order = () => {
               <p className="mb-2">Address: {order.deliveryInformation.address}</p>
               <p className="mb-2">Phone Number: {order.deliveryInformation.phoneNumber}</p>
               <p className="mb-2">Condition: {order.condition}</p>
-              <p className="mb-2">CreateAt: {order.createdAt}</p>
-
-
+              <p className="mb-2">CreateAt: {new Date(order.createdAt).toLocaleString('en-GB', {day:'numeric', month: 'long', year:'numeric', hour:'numeric', minute:'numeric'})}</p>
             </div>
             <div className="mt-4">
               <h3 className="font-bold">Items:</h3>
