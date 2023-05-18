@@ -104,13 +104,14 @@ const Navbar = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            </div>    
-              <button
+            </div>
+
+              {user ?(<button
                 type="button"
                 className="bg-red-500 p-1 rounded-full text-white-400 hover:text-white"
               >
                 <Link to={'cart'}><FaShoppingCart size={20}/> </Link> 
-              </button>
+              </button>):(<></>)}
 
               {user ? 
               (<button
