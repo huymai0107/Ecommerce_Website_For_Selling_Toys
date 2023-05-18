@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from '../redux/apiRequest';
 import { clearCart } from '../redux/apiRequest';
+import { warn } from '../util/Warn';
+import { ToastContainer } from 'react-toastify';
 
 const CheckOut = () => {
   const host = 'https://provinces.open-api.vn/api/';
@@ -100,28 +102,36 @@ const CheckOut = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   function handleFormSubmit(Name, Address, phoneNumber) {
-    console.log(Name, Address, phoneNumber);
-    const newItem = {
-      userId: user.others._id,
-      items: cartData?.items,
-      deliveryInformation: {
-        name: Name,
-        address: Address,
-        phoneNumber: phoneNumber,
-      },
-    };
+    // console.log(Name, Address, phoneNumber);
+    if(!Name || !Address || !phoneNumber){
+     warn("Please enter all fields")
 
-    createOrder(user.accessToken, newItem, dispatch);
-    clearCart(user.accessToken, user.others._id, dispatch, navigate);
-    navigate('/');
-
-    setName('');
-    setAddress('');
-    setPhoneNumber('');
+    }
+    else{
+      const newItem = {
+        userId: user.others._id,
+        items: cartData?.items,
+        deliveryInformation: {
+          name: Name,
+          address: Address,
+          phoneNumber: phoneNumber,
+        },
+      };
+  
+      createOrder(user.accessToken, newItem, dispatch);
+      clearCart(user.accessToken, user.others._id, dispatch, navigate);
+      navigate('/');
+  
+      setName('');
+      setAddress('');
+      setPhoneNumber('');
+    }
+    
   }
 
   return (
-    <div className="container mx-auto p-10">
+    <>
+      <div className="container mx-auto p-10">
   <div className="flex flex-col gap-4">
     <div className="flex flex-col md:flex-row items-center gap-4">
       <label className="text-lg font-medium">Name:</label>
@@ -200,7 +210,9 @@ const CheckOut = () => {
       </button>
     </div>
   </div>
-</div>
+  </div>
+  <ToastContainer/> 
+    </>
 
   );
 };
