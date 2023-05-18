@@ -16,7 +16,6 @@ export const loginUser = async(user, dispatch, navigate) => {
           dispatch(loginSuccess(res.data));
     } catch (err) {
         dispatch(loginFailed());
-        navigate("/signin")
         throw new Error(err.response.data);
 
     }
@@ -126,6 +125,7 @@ export const getProductById = async (id,dispatch) =>{
         dispatch(gettheproductFailed());
     }
 }
+
 //ORDER
 export const getOrder = async (accesstoken,userid,dispatch) =>{
     dispatch(getOrderStart());

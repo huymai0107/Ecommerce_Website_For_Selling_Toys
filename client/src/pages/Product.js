@@ -43,12 +43,13 @@ function Product() {
     }
   }
   const theproductData = useSelector((state) => state.theproduct.theproduct?.theproduct);
-  const { id } = useParams();
+  const  id  = useParams()
   const dispatch = useDispatch();
-  //GET ALL PRODUCTS
-  useEffect(() => {
-    getProductById(id, dispatch);
-  }, []);
+      //GET ALL PRODUCTS
+      useEffect(() =>{
+          getProductById(id,dispatch);
+          
+      },[]);
 
   return (
     <div className="container mx-auto p-10">
@@ -68,6 +69,7 @@ function Product() {
               <button
                 className="px-2 py-1 bg-gray-200 text-gray-500 rounded-md"
                 onClick={() => setSelectedNumber(selectedNumber - 1)}
+                onChange={handleNumberChange}
               >
                 <AiOutlineMinus className="h-4 w-4" />
               </button>
@@ -75,6 +77,7 @@ function Product() {
               <button
                 className="px-2 py-1 bg-gray-200 text-gray-500 rounded-md"
                 onClick={() => setSelectedNumber(selectedNumber + 1)}
+                onChange={handleNumberChange}
               >
                 <AiOutlinePlus className="h-4 w-4" />
               </button>
