@@ -7,7 +7,12 @@ import { addToCart } from '../redux/apiRequest';
 import { warn } from '../util/Warn';
 import { success } from '../util/Success';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-
+import styled from "styled-components";
+import { convertBufferToBase64 } from '../util/convertBufferToBase64';
+const Image = styled.img`
+  height: 75%;
+  z-index: 2;
+`;
 function Product() {
   const [selectedNumber, setSelectedNumber] = useState('');
   const handleNumberChange = (event) => {
@@ -51,11 +56,14 @@ function Product() {
   }, []);
 
   
-
+  const base64String = convertBufferToBase64(theproductData?.img.data.data);
   return (
+    
     <div className="container mx-auto p-10">
       <div className="flex items-center">
-        <div className="w-96 h-96 bg-gray-200 rounded-lg"></div>
+        <div className="w-96 h-96 bg-gray-200 rounded-lg">
+        <Image       src={`data:image/png;base64,${base64String}`} />
+        </div>
         <div className="ml-8">
           <h2 className="text-3xl font-bold">{theproductData?.name}</h2>
           <p className="text-gray-500 mt-2">Price: {theproductData?.price}</p>

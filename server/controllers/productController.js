@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+var fs = require('fs');
 
 // Controller methods
 const productController = {
@@ -26,13 +27,28 @@ const productController = {
   },
 
   createProduct: async (req, res) => {
-    try {
+    // try {
       const { name, price, description } = req.body;
-      const product = await Product.create({ name, price, description });
+      console.log(req.file)
+      // const product = await Product.create({ name, price, description,})
+
+
+        const product = new Product({
+          name,
+          price,
+          description,
+          img:{
+            data: fs.readFileSync("uploads/"+ req.file.filename),
+            contentType:"image/png"
+          }
+        });
+        const saveproduct = await product.save();
+
+
       res.status(201).json(product);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
+    // } catch (error) {
+    //   res.status(500).json({ error: 'Internal server error' });
+    // }
   },
 
   updateProduct: async (req, res) => {

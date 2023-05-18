@@ -13,9 +13,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  img:{
-    type: String,
-  }
+  img: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 module.exports = mongoose.model('Product', productSchema);

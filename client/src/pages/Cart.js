@@ -52,10 +52,9 @@ const Cart = () => {
 
   function handleCheckout() {
     // Construct the checkout URL with user ID and cart items
-    const checkoutUrl = `/checkout/?userId=${user?.others._id}&items=${JSON.stringify(cartData?.items)}`;
 
     // Navigate to the checkout form
-    navigate(checkoutUrl);
+    navigate(`/checkout/`);
   }
 
   return (

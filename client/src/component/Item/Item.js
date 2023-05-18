@@ -13,6 +13,9 @@ import {
   getAllUsers,
 } from "../../redux/apiRequest"; 
 import { success } from '../../util/Success';
+import { convertBufferToBase64 } from '../../util/convertBufferToBase64';
+
+
 const Container = styled.div`
     padding: 20px;
     display: flex;
@@ -109,14 +112,24 @@ const Item = () => {
         useEffect(() =>{
             getAllProducts(dispatch);
         },[]);
+
+        // function convertBufferToBase64(buffer) {
+        //   const binary = Array.from(new Uint8Array(buffer));
+        //   const base64 = btoa(binary.map(byte => String.fromCharCode(byte)).join(''));
+        //   return base64;
+        // }
         return (
 <>
             <Container>
-              {productData?.map((item) => (
+              {productData?.map((item) => {
+                const base64String = convertBufferToBase64(item.img.data.data);
+
+                return(
                 
                     <ContainerForEachItems key={item._id}>
                     <Circle />
-                    {/* <Image src={item.photo} /> */}
+                    <Image       src={`data:image/png;base64,${base64String}`} />
+                    
                     <Info>                     
                       <Icon onClick={() => handleAddProduct(item._id)}>
                        <AiOutlineShoppingCart/>
@@ -128,9 +141,11 @@ const Item = () => {
                         </Link>
                     </Info>
                   </ContainerForEachItems>
-              ))}
+              )})}
             </Container>
             <ToastContainer/>
+            <div>
+    </div>
 </>
 
           );
