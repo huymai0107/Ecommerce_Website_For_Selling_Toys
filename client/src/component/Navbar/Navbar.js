@@ -5,7 +5,7 @@ import {MdArrowDropDown,MdArrowDropUp} from 'react-icons/md';
 import {ImMenu3,ImMenu4} from 'react-icons/im'; 
 import {Link} from 'react-router-dom';
 import { useSelector } from "react-redux";
-
+import "./Navbar.css"
 
 
 const Navbar = () => {
