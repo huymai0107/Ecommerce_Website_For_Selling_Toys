@@ -25,10 +25,23 @@ const productController = {
       res.status(500).json({ error: 'Internal server error' });
     }
   },
+  searchProduct: async (req, res) => {
+    try {
+      const Searchterm = req.params.searchterm;
+      const product = await Product.find({$or: [{name: Searchterm},{category: Searchterm}]})
+      if (product) {
+        res.json(product);
+      } else {
+        res.status(404).json({ error: 'Product not found' });
+      }
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
 
   createProduct: async (req, res) => {
     // try {
-      const { name, price, description } = req.body;
+      const { name, price, description, category } = req.body;
       console.log(req.file)
       // const product = await Product.create({ name, price, description,})
 
@@ -37,6 +50,7 @@ const productController = {
           name,
           price,
           description,
+          category,
           img:{
             data: fs.readFileSync("uploads/"+ req.file.filename),
             contentType:"image/png"

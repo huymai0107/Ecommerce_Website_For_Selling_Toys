@@ -44,7 +44,7 @@ function SignIn() {
         password: ''
       });
     };
-    const handleSubmit =async (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault()
       const{ email,password} = data 
       if(email && password){

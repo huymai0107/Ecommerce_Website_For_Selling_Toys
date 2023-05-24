@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from "./redux/store"
 import {createBrowserRouter,createRoutesFromElements,Route, RouterProvider} from 'react-router-dom'; 
 import SignIn from './pages/SignIn';
 import Signup from './pages/SignUp';
@@ -15,7 +14,8 @@ import Cart from './pages/Cart';
 import CheckOut from './pages/CheckOut';
 import Order from './pages/Order';
 import Product from './pages/Product';
-
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './redux/store';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path ='/' element={<App/>} >
@@ -35,7 +35,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store = {store}>
+  <PersistGate loading={null} persistor={persistor}>
    <RouterProvider router={router} />
+   </PersistGate>
   </Provider>
 );
 

@@ -1,6 +1,6 @@
 import Item from '../component/Item/Item'
 import React, { useEffect, useState } from 'react'
-import {getCart, addToCart, getAllProducts, getAllUsers } from '../redux/apiRequest'
+import {getCart, addToCart, getAllProducts, getAllUsers, logoutUser } from '../redux/apiRequest'
 import {useDispatch, useSelector } from "react-redux"
 import {useNavigate} from "react-router-dom";
 
@@ -21,7 +21,12 @@ function Home() {
       addToCart(user.others._id,newItem,dispatch, navigate,)
 
     }
-
+    function handlelogout() {
+      if(user?.accessToken)
+        {   
+        logoutUser(user.accessToken,user.others._id,dispatch)
+        }
+}
   //GET ALL PRODUCTS
   useEffect(() =>{
     if(!user){
@@ -39,7 +44,10 @@ function Home() {
   //     getAllUsers(user?.accessToken, dispatch);}
   //  },[]);
   return (
-    <div><Item/></div>
+    <div><Item/>
+        <button onClick={() => handlelogout()}>Test</button>
+
+    </div>
   )
 }
 
