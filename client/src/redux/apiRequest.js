@@ -1,5 +1,5 @@
 import axios from "axios"
-import { loginFailed, loginStart, loginSuccess, registerFailed, registerStart, registerSuccess } from "./authSlice"
+import { loginFailed, loginStart, loginSuccess, logoutFailed, logoutStart, logoutSuccess, registerFailed, registerStart, registerSuccess } from "./authSlice"
 import { getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice";
 import { getProductsFailed, getProductsStart, getProductsSuccess } from "./productSlice";
 import 
@@ -17,6 +17,22 @@ export const loginUser = async(user, dispatch, navigate) => {
     } catch (err) {
         dispatch(loginFailed());
         navigate("/signin")
+        throw new Error(err.response.data);
+
+    }
+}
+
+export const logoutUser = async(accesstoken,user,dispatch) => {
+    
+    dispatch(logoutStart());
+    try {
+        const res = await axios.post("http://localhost:8080/auth/logout", user,{
+            headers: {token:`Bearer ${accesstoken}`}
+        })  
+        // navigate("/")
+          dispatch(logoutSuccess(res.data));
+    } catch (err) {
+        dispatch(logoutFailed());
         throw new Error(err.response.data);
 
     }

@@ -3,16 +3,18 @@ import { FaShoppingCart, FaUser,FaSearch } from "react-icons/fa";
 import logo from '../../assest/logo-trans.png';
 import {MdArrowDropDown,MdArrowDropUp} from 'react-icons/md';
 import {ImMenu3,ImMenu4} from 'react-icons/im'; 
-import {Link} from 'react-router-dom';
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector } from "react-redux"
+import {Link,useNavigate} from 'react-router-dom'
 import "./Navbar.css"
+import { logoutUser } from "../../redux/apiRequest";
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setMenuIsOpen] = useState(false);
   const [isUser,setUser] = useState(false)
-
+  const dispatch = useDispatch;
+  const navigate = useNavigate;
   const [searchTerm, setSearchTerm] = useState("");
 
   const toggleMenu = () => setMenuIsOpen(!isMenuOpen);
@@ -20,6 +22,8 @@ const Navbar = () => {
   const toggleUser = () => setUser(!isUser)
 
   const user = useSelector((state) => state.auth.login?.currentUser);
+
+  
   return (
     <nav className="sticky top-0 bg-red-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -130,13 +134,13 @@ const Navbar = () => {
                         Order
                       </Link>
                     </div>
-                    <div className="flex">
-                      <Link
+                    <div className="flex" >
+                      <div
                         to= {''}
                         className="px-12 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       >
                        LogOut
-                      </Link>
+                      </div>
                     </div>
                   </ul>
                 )}
