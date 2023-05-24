@@ -22,21 +22,17 @@ export const loginUser = async(user, dispatch, navigate) => {
     }
 }
 
-export const logoutUser = async(accesstoken,user,dispatch) => {
+export const logoutUser = async(accesstoken,user,dispatch, navigate) => {
     
-    dispatch(logoutStart());
-    try {
         const res = await axios.post("http://localhost:8080/auth/logout", user,{
             headers: {token:`Bearer ${accesstoken}`}
         })  
         // navigate("/")
           dispatch(logoutSuccess(res.data));
-    } catch (err) {
-        dispatch(logoutFailed());
-        throw new Error(err.response.data);
+
 
     }
-}
+
 
 export const registerUser = async(user, dispatch, navigate) => {
     dispatch(registerStart());
@@ -61,6 +57,20 @@ export const getAllUsers = async (accesstoken, dispatch) =>{
         dispatch(getUsersFailed());
     }
 }
+//PRODUCT
+export const searchProduct = async (dispatch, search) =>{
+    dispatch(getProductsStart());
+    // console.log(accesstoken);
+    try{
+        const res = await axios.get("http://localhost:8080/product/search/" + search,{
+            // headers: {token:`Bearer ${accesstoken}`}
+        })
+        dispatch(getProductsSuccess(res.data))
+    }catch(err){
+        dispatch(getProductsFailed());
+    }
+}
+
 
 // export const getAllProducts = async (accesstoken, dispatch) =>{
     export const getAllProducts = async (dispatch) =>{

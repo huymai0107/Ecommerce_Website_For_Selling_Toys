@@ -6,15 +6,15 @@ import {ImMenu3,ImMenu4} from 'react-icons/im';
 import {useDispatch, useSelector } from "react-redux"
 import {Link,useNavigate} from 'react-router-dom'
 import "./Navbar.css"
-import { logoutUser } from "../../redux/apiRequest";
+import { logoutUser, searchProduct } from "../../redux/apiRequest";
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setMenuIsOpen] = useState(false);
   const [isUser,setUser] = useState(false)
-  const dispatch = useDispatch;
-  const navigate = useNavigate;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
   const toggleMenu = () => setMenuIsOpen(!isMenuOpen);
@@ -22,10 +22,16 @@ const Navbar = () => {
   const toggleUser = () => setUser(!isUser)
 
   const user = useSelector((state) => state.auth.login?.currentUser);
-
-  
+  function handleSearch(search){
+    console.log("Yes");
+    searchProduct(dispatch, search);
+  }
+  function handlelogout(){
+    logoutUser(user.accessToken, user.others._id, dispatch, navigate);
+  }
   return (
     <nav className="sticky top-0 bg-red-500">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -98,16 +104,17 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
             <div className="relative right-5">
-            <span className="absolute inset-y-0 left-0 right-5 pl-3 flex items-center">
+            <span className=" inset-y-0 left-0 right-5 pl-3 flex items-center">
               <FaSearch className="text-gray-500" />
             </span>
             <input
               type="text"
               placeholder="Search..."
               className=" w-full py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {handleSearch(e.target.value)}
+              }
             />
+
             </div>
 
               {user ?(<button
@@ -134,14 +141,12 @@ const Navbar = () => {
                         Order
                       </Link>
                     </div>
-                    <div className="flex" >
                       <div
-                        to= {''}
                         className="px-12 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        onClick={() => handlelogout()}
                       >
                        LogOut
                       </div>
-                    </div>
                   </ul>
                 )}
                 </button>)
@@ -181,14 +186,10 @@ const Navbar = () => {
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 right-5 pl-3 flex items-center rounded">
-              <FaSearch className="text-gray-500" />
-            </span>
             <input
               type="text"
               placeholder="Search..."
               className=" w-full py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-              value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             </div>  
