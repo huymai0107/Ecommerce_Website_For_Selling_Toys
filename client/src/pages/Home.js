@@ -21,12 +21,7 @@ function Home() {
       addToCart(user.others._id,newItem,dispatch, navigate,)
 
     }
-    function handlelogout() {
-      if(user?.accessToken)
-        {   
-        logoutUser(user.accessToken,user.others._id,dispatch)
-        }
-}
+
   //GET ALL PRODUCTS
   useEffect(() =>{
     if(!user){
@@ -45,7 +40,6 @@ function Home() {
   //  },[]);
   return (
     <div><Item/>
-        <button onClick={() => handlelogout()}>Test</button>
 
     </div>
   )

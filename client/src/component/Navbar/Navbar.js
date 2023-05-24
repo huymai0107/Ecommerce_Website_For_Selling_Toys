@@ -6,7 +6,7 @@ import {ImMenu3,ImMenu4} from 'react-icons/im';
 import {useDispatch, useSelector } from "react-redux"
 import {Link,useNavigate} from 'react-router-dom'
 import "./Navbar.css"
-import { logoutUser, searchProduct } from "../../redux/apiRequest";
+import { getAllProducts, logoutUser, searchProduct } from "../../redux/apiRequest";
 
 
 const Navbar = () => {
@@ -23,6 +23,9 @@ const Navbar = () => {
 
   const user = useSelector((state) => state.auth.login?.currentUser);
   function handleSearch(search){
+    if(search === ""){
+      getAllProducts(dispatch);
+    }
     console.log("Yes");
     searchProduct(dispatch, search);
   }
@@ -196,6 +199,7 @@ const Navbar = () => {
             <Link
               href="#"
               className="hover:bg-red-600 text-white block px-3 py-2 rounded-md text-base font-medium"
+              onClick={getAllProducts(dispatch)}
             >
               Home
             </Link>
