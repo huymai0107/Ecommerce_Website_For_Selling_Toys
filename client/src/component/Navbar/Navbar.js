@@ -23,6 +23,7 @@ const Navbar = () => {
 
   const user = useSelector((state) => state.auth.login?.currentUser);
   function handleSearch(search){
+    navigate("/");
     if(search === ""){
       getAllProducts(dispatch);
     }
@@ -32,6 +33,9 @@ const Navbar = () => {
   function handlelogout(){
     logoutUser(user.accessToken, user.others._id, dispatch, navigate);
   }
+  const handleLinkClick = () => {
+    window.location.href = '/'; // Reloads the page at "/"
+  };
   return (
     <nav className="sticky top-0 bg-red-500">
 
@@ -46,12 +50,13 @@ const Navbar = () => {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link
-                to={'/'}
-                className=" text-white px-3 py-2 rounded-md text-xl font-medium"
-              >
-                Home
-              </Link>
+            <Link
+      to={'/'}
+      className="text-white px-3 py-2 rounded-md text-xl font-medium"
+      onClick={handleLinkClick}
+    >
+      Home
+    </Link>
 
               <div className="relative"  >
                 <button onClick={toggleProduct}  type="button"
@@ -110,13 +115,23 @@ const Navbar = () => {
             <span className="absolute top-2 left-1 right-5 pl-3 flex items-center">
               <FaSearch className="text-gray-500" />
             </span>
-            <input
+            <form onSubmit={(e) => {
+  e.preventDefault();
+  handleSearch(e.target.search.value);
+}}>            <input
               type="text"
               placeholder="Search..."
+              name = "search"
               className=" w-full py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-              onChange={(e) => {handleSearch(e.target.value)}
-              }
+              // onChange={(e) => {handleSearch(e.target.value)}}
+              
             />
+      <input
+        type="submit"
+        value="Submit"
+        style={{ display: 'none' }}
+      />            </form>
+
 
             </div>
 

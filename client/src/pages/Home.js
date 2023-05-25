@@ -24,9 +24,6 @@ function Home() {
 
   //GET ALL PRODUCTS
   useEffect(() =>{
-    if(!user){
-      // navigate("/signin");
-    }
       getAllProducts(dispatch);
   },[]);
   // GET ALL USERS
