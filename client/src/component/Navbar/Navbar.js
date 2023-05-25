@@ -107,7 +107,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
             <div className="relative right-5">
-            <span className=" inset-y-0 left-0 right-5 pl-3 flex items-center">
+            <span className="absolute top-2 left-1 right-5 pl-3 flex items-center">
               <FaSearch className="text-gray-500" />
             </span>
             <input

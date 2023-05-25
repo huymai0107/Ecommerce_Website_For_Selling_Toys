@@ -64,8 +64,8 @@ function Product() {
     
     <div className="container mx-auto p-10">
       <div className="flex items-center">
-        <div className="w-96 h-96 bg-gray-200 rounded-lg">
-        <Image       src={`data:image/png;base64,${base64String}`} />
+      <div className="w-96 h-96 bg-gray-200 rounded-lg flex items-center justify-center">
+          <Image src={`data:image/png;base64,${base64String}`} />
         </div>
         <div className="ml-8">
           <h2 className="text-3xl font-bold">{theproductData?.name}</h2>
