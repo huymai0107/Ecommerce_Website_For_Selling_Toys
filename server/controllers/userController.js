@@ -1,12 +1,10 @@
 const User = require("../models/User");
-
 const userController ={
     //GET ALL USERS
     getAllUsers: async (req, res) =>{
         try{
             const user = await User.find();
             return res.status(200).json(user);
-
         } catch(err){
             return res.status(500).json(err);
         }
@@ -30,5 +28,4 @@ const userController ={
         }
     }
 }
-
 module.exports = userController;

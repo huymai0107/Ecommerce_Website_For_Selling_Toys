@@ -131,18 +131,22 @@ const CheckOut = () => {
 
   return (
     <>
-      <div className="container mx-auto p-10">
+  <div className="container mx-auto p-10">
   <div className="flex flex-col gap-4">
-    <div className="flex flex-col md:flex-row items-center gap-4">
+    <div className="flex flex-col md:flex-row items-center gap-20">
       <label className="text-lg font-medium">Name:</label>
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className="border border-gray-300 rounded px-4 py-2" />
+    </div>
+    <div className="flex flex-col md:flex-row items-center gap-16">
+      <label className="text-lg font-medium">Address:</label>
+      <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required className="border border-gray-300 rounded px-4 py-2" />
     </div>
     <div className="flex flex-col md:flex-row items-center gap-4">
       <select
         value={selectedProvince.code || ''}
         onChange={handleProvinceChange}
         className="border border-gray-300 rounded px-4 py-2"
-        style={{ width: '50%' }}
+        style={{ width: '20%' }}
 
       >
         <option value="">Province</option>
@@ -156,7 +160,7 @@ const CheckOut = () => {
         value={selectedDistrict.code || ''}
         onChange={handleDistrictChange}
         className="border border-gray-300 rounded px-4 py-2"
-        style={{ width: '50%' }}
+        style={{ width: '20%' }}
 
       >
         <option value="">District</option>
@@ -170,7 +174,7 @@ const CheckOut = () => {
         value={selectedWard.code || ''}
         onChange={handleWardChange}
         className="border border-gray-300 rounded px-4 py-2"
-        style={{ width: '50%' }}
+        style={{ width: '20%' }}
 
       >
         <option value="">Ward</option>
@@ -181,11 +185,8 @@ const CheckOut = () => {
         ))}
       </select>
     </div>
-    <div className="flex flex-col md:flex-row items-center gap-4">
-      <label className="text-lg font-medium">Address:</label>
-      <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required className="border border-gray-300 rounded px-4 py-2" />
-    </div>
-    <div className="flex flex-col md:flex-row items-center gap-4">
+  
+    <div className="flex flex-col md:flex-row items-center gap-2">
       <label className="text-lg font-medium">Phone Number:</label>
       <input
         type="text"
@@ -211,6 +212,7 @@ const CheckOut = () => {
     </div>
   </div>
   </div>
+
   <ToastContainer/> 
     </>
 
